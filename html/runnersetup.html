@@ -1,0 +1,272 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Setting up the CI Runner for Gitlab &mdash; Gitlab CI with Docker and Sphinx 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting started with Sphinx" href="Sphinxgettingstarted.html" />
+    <link rel="prev" title="Resources" href="Resources.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Gitlab CI with Docker and Sphinx
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Dockersetup.html">Setting up Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GitLabsetup.html">Gitlab setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Resources.html">Resources</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Setting up the CI Runner for Gitlab</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#install-register-the-runner">Install &amp; Register the runner</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Sphinxgettingstarted.html">Getting started with Sphinx</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Gitlab CI with Docker and Sphinx</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Setting up the CI Runner for Gitlab</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/runnersetup.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="setting-up-the-ci-runner-for-gitlab">
+<h1>Setting up the CI Runner for Gitlab<a class="headerlink" href="#setting-up-the-ci-runner-for-gitlab" title="Permalink to this headline">¶</a></h1>
+<p>CI is Continuous intergration.  Allows multiple people to work on the same project code in real time.  Users create code,
+and upload/merge to the CI server many times throughout the workday. We are going to use a mac OS runner with our Gitlab server.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Install the runner on a different host than your GitLab server.</p>
+</div>
+<ol class="arabic">
+<li><p class="first">Using terminal, download the binary package.</p>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">curl</span> <span class="pre">--output</span> <span class="pre">/usr/local/bin/gitlab-runner</span> <span class="pre">https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-darwin-amd64</span></code></p>
+</li>
+<li><p class="first">Make the binary executable.</p>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">chmod</span> <span class="pre">+x</span> <span class="pre">/usr/local/bin/gitlab-runner</span></code></p>
+</li>
+</ol>
+<p><strong>The following commands need to be run as the user that’s going to run the runner.</strong></p>
+<div class="section" id="install-register-the-runner">
+<h2>Install &amp; Register the runner<a class="headerlink" href="#install-register-the-runner" title="Permalink to this headline">¶</a></h2>
+<p>Registering the runner binds the runner to your gitlab server. Make sure you install the runner on a different server than gitlab.
+You can only add the runner to your gitlab server if you are the admin of the GitLab server.
+Change to your home dir, <a class="reference external" href="https://docs.gitlab.com/runner/install/osx.html#installation">install</a> the runner and start the service.</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">gitlab-runner</span> <span class="pre">install</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">gitlab-runner</span> <span class="pre">start</span></code></li>
+</ul>
+</div></blockquote>
+<p>The registration token is available at the <code class="docutils literal notranslate"><span class="pre">admin/runners</span></code> page.</p>
+<img alt="_images/runnertoken.png" src="_images/runnertoken.png" />
+<p><strong>Register</strong></p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">gitlab-runner</span> <span class="pre">register</span></code></li>
+<li>Enter your Gitlab server url.</li>
+<li><code class="docutils literal notranslate"><span class="pre">https://my.server.com</span></code></li>
+<li>Enter your runner token.</li>
+<li><code class="docutils literal notranslate"><span class="pre">myS3crT0k</span></code></li>
+<li>Enter a description for the runner.  If you can’t think of anything clever, it can be changed later in the UI.</li>
+<li>Next enter tags for the runner. Add as many as you would like, separated by commas.</li>
+<li>Enter the runner executor, we used <code class="docutils literal notranslate"><span class="pre">docker</span></code></li>
+<li>Lastly we need to set the default image docker will use to build the envirnoment.  We are using <code class="docutils literal notranslate"><span class="pre">alpine:latest</span></code> or alpine 3.6.</li>
+</ul>
+<p>For other configurations and OS’s check out <a class="reference external" href="https://docs.gitlab.com/runner/register/index.html">Gitlab’s Registering Runners Documentation</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Sphinxgettingstarted.html" class="btn btn-neutral float-right" title="Getting started with Sphinx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Resources.html" class="btn btn-neutral" title="Resources" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Dan DeRusha.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

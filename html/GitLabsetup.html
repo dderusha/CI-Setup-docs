@@ -1,0 +1,299 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Gitlab setup &mdash; Gitlab CI with Docker and Sphinx 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Resources" href="Resources.html" />
+    <link rel="prev" title="Setting up Docker" href="Dockersetup.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Gitlab CI with Docker and Sphinx
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Dockersetup.html">Setting up Docker</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Gitlab setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#gitlab-prep-for-ci">Gitlab prep for CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-gitlab-ci-yml-file">Creating .gitlab-ci.yml file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="runnersetup.html">Setting up the CI Runner for Gitlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Sphinxgettingstarted.html">Getting started with Sphinx</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Gitlab CI with Docker and Sphinx</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Gitlab setup</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/GitLabsetup.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="gitlab-setup">
+<h1>Gitlab setup<a class="headerlink" href="#gitlab-setup" title="Permalink to this headline">¶</a></h1>
+<p>We set our sever up 3 years ago and did not document the steps :( BUT there is a article posted on
+<a class="reference external" href="https://www.techrepublic.com/article/how-to-set-up-a-gitlab-server-and-host-your-own-git-repositories/">Techrepublic.com</a> that has all the
+steps covered. Jack even included instructions for adding SSH keys so your client can talk to the GitLab server.</p>
+<div class="section" id="gitlab-prep-for-ci">
+<h2>Gitlab prep for CI<a class="headerlink" href="#gitlab-prep-for-ci" title="Permalink to this headline">¶</a></h2>
+<p>At this point you should have a functioning internal GitLab server.  Next step is to create a project.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Login to your Gitlab server.</li>
+<li>Click the green button to create a new Project.</li>
+</ul>
+</div></blockquote>
+<img alt="_images/newproject.png" src="_images/newproject.png" />
+<ol class="arabic simple">
+<li>Name your project</li>
+<li>add a project description</li>
+<li>Select a visability level.
+<strong>I picked Internal so anyone can contribute from our team.</strong></li>
+<li>Click create project</li>
+</ol>
+<a class="reference internal image-reference" href="_images/newproject2.png"><img alt="_images/newproject2.png" src="_images/newproject2.png" style="width: 75%;" /></a>
+</div>
+<div class="section" id="creating-gitlab-ci-yml-file">
+<h2>Creating .gitlab-ci.yml file<a class="headerlink" href="#creating-gitlab-ci-yml-file" title="Permalink to this headline">¶</a></h2>
+<p>Now we have a project started and we can add a configuation file.  The .gitlab-ci.yml file needs to be in the root of the
+project.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">YAML files are sensitive to indentation and spacing.  Do not use tab to create spaces.</p>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Touch</span></code> and create a file called .gitlab-ci.yml</p>
+</div></blockquote>
+<img alt="_images/exampleyml.png" src="_images/exampleyml.png" />
+<p>As you can see at the top of the image shows the .yml file is configured correctly.
+Super, it’s setup correctly, but how do we format it?</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>There is a list of reserved keywords that cannot be used to name a job.</p>
+<ul class="last simple">
+<li><code class="docutils literal notranslate"><span class="pre">image</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">services</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">stages</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">types</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">before_script</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">after_script</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">varibales</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">cache</span></code></li>
+</ul>
+</div>
+<p>A <a class="reference external" href="https://docs.gitlab.com/ee/ci/yaml/README.html#jobs">job</a> is defined by a list of paramaters telling the job what to do.  In our case, we want to automate our document building.
+Now all the pieces are coming together.</p>
+<ul class="simple">
+<li>We have a gitlab server to host our projects containing code and documentation.</li>
+<li>We configured docker</li>
+<li>We setup our runner</li>
+</ul>
+<p>We need to tell the runner what to “automate”, then the runner configures the docker contaniner with our .gitlab-ci.yml setup file.
+Every job needs to have a script, everything else is optional.  In our case we use <code class="docutils literal notranslate"><span class="pre">image</span></code> to define what OS to load in our docker container.
+We chose <a class="reference external" href="https://hub.docker.com/_/alpine/">alpine 3.6</a> which is a 5MB linux image. You can find tons of other Official repositories on <a class="reference external" href="https://hub.docker.com/explore/">Dockers site</a>.</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">Pages:</span></code> can be any word you want to describe the job such as “poopmonster” or “job1”.  The educated call it arbitrary.
+The <code class="docutils literal notranslate"><span class="pre">script:</span></code> builds a fresh new envirnoment everytime. Previously these steps were manual.  The CI also takes the built files and
+reloads them so all changes are immediatly available.</p>
+<p><code class="docutils literal notranslate"><span class="pre">only:</span></code> is a list of git refs for which job is created.</p>
+<p><code class="docutils literal notranslate"><span class="pre">artifacts:</span></code> <a class="reference external" href="https://docs.gitlab.com/ee/ci/yaml/README.html#artifacts">Artifacts</a> are a listing of files and directories where the successful job gets placed.</p>
+</div></blockquote>
+<p>For more information about GitLab’s CI/CD configuration <a class="reference external" href="https://docs.gitlab.com/ee/ci/quick_start/README.html">Click here</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Resources.html" class="btn btn-neutral float-right" title="Resources" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Dockersetup.html" class="btn btn-neutral" title="Setting up Docker" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Dan DeRusha.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

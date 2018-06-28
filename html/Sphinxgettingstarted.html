@@ -1,0 +1,349 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Getting started with Sphinx &mdash; Gitlab CI with Docker and Sphinx 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Setting up the CI Runner for Gitlab" href="runnersetup.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Gitlab CI with Docker and Sphinx
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Dockersetup.html">Setting up Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GitLabsetup.html">Gitlab setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="runnersetup.html">Setting up the CI Runner for Gitlab</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started with Sphinx</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-sphinx">Install Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-your-sphinx-project">Setting up your Sphinx project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#working-with-your-new-sphinx-project">Working with your new Sphinx project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-your-sphinx-project">Building your Sphinx project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sphinx-themes">Sphinx Themes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-a-theme">Setting up a Theme</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Gitlab CI with Docker and Sphinx</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Getting started with Sphinx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Sphinxgettingstarted.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="getting-started-with-sphinx">
+<h1>Getting started with Sphinx<a class="headerlink" href="#getting-started-with-sphinx" title="Permalink to this headline">¶</a></h1>
+<p>While attending and <a class="reference external" href="https://www.youtube.com/watch?v=1MEd8enXOUY&amp;t=706s">presenting</a> at Mac Admin and Developer conference, <a class="reference external" href="https://www.macad.uk">MacAD.uk</a> there was a session
+<a class="reference external" href="https://www.youtube.com/watch?v=JQ8RQru-Y9Y">Your code should document itself! Embedding documentation into your Python projects</a> that interested me.
+Awesome content presented by Bryson, I knew someday this would be useful.  Working on a project, people were asking for documentation explaing our processes. Like any good project,
+we didn’t have any centralized methodical represenation of our thoughts, why not use <a class="reference external" href="http://www.sphinx-doc.org/en/stable/">Sphinx?</a></p>
+<div class="section" id="id1">
+<h2>Sphinx<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.sphinx-doc.org/en/stable/">Sphinx</a> is a tool that makes it easy to create intelligent and beautiful documentation,
+written by Georg Brandl and licensed under the BSD license.</p>
+</div>
+<div class="section" id="install-sphinx">
+<h2>Install Sphinx<a class="headerlink" href="#install-sphinx" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">sphinx</span></code></p>
+<dl class="docutils">
+<dt>Make a directory somewhere to house your Sphinx projects.</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">/place/to/store/sphinx/docs</span></code></dd>
+<dt>Change into your new directory.</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">/place/where/you/stored/sphinx/docs</span></code></dd>
+<dt>Next start your project by running</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">sphinx-quickstart</span></code></dd>
+</dl>
+</div>
+<div class="section" id="setting-up-your-sphinx-project">
+<h2>Setting up your Sphinx project<a class="headerlink" href="#setting-up-your-sphinx-project" title="Permalink to this headline">¶</a></h2>
+<p>After runnin <code class="docutils literal notranslate"><span class="pre">sphinx-quickstart</span></code> you should see the following output.</p>
+<img alt="_images/sphinx-quickstart.png" src="_images/sphinx-quickstart.png" />
+<p>the default setting is in <code class="docutils literal notranslate"><span class="pre">[]</span></code> , press return for the default setting.</p>
+<ul class="simple">
+<li>Follow along with the promts that get outputted after your selections.</li>
+<li>Name the project</li>
+<li>Add the author and give the project a version number.</li>
+</ul>
+<img alt="_images/projectnameSphinx.png" src="_images/projectnameSphinx.png" />
+<p>After completing all the prompts, I suggest creating the Makefile.</p>
+<img alt="_images/sphinxdone.png" src="_images/sphinxdone.png" />
+<p>Congrats!! your first sphinx project is now started!</p>
+</div>
+<div class="section" id="working-with-your-new-sphinx-project">
+<h2>Working with your new Sphinx project<a class="headerlink" href="#working-with-your-new-sphinx-project" title="Permalink to this headline">¶</a></h2>
+<p>Navagate to the directory you setup for your documentation, and you should see something similar:</p>
+<a class="reference internal image-reference" href="_images/projectStart.png"><img alt="_images/projectStart.png" src="_images/projectStart.png" style="width: 49%;" /></a>
+<p>I use <a class="reference external" href="https://atom.io">atom</a> to edit the <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> and <code class="docutils literal notranslate"><span class="pre">index.rst</span></code> files.  There are plenty of editors you
+can choose from such as <a class="reference external" href="https://www.sublimetext.com">Sublime</a> or <a class="reference external" href="https://www.barebones.com">BBedit</a>.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Open terminal and <code class="docutils literal notranslate"><span class="pre">cd</span></code> to the project directory.</li>
+<li>Next let’s create some <code class="docutils literal notranslate"><span class="pre">.rst</span></code> files to get our documentation started.</li>
+<li>While in the current project directory, <code class="docutils literal notranslate"><span class="pre">touch</span> <span class="pre">mysphinxdirections.rst</span></code> to create a Restructured Text file.</li>
+</ul>
+</div></blockquote>
+<p>I’d create a couple of files to get started.  For example, some docs used to create this project are called</p>
+<blockquote>
+<div><ul class="simple">
+<li>sphinxgettingstarted.rst</li>
+<li>GitLabsetup.rst</li>
+<li>runnersetup.rst</li>
+</ul>
+</div></blockquote>
+<p><strong>Avoid spaces,</strong> and try to keep the filename relevant to it’s function.</p>
+<p>Open your editor and open your project.  Open your <code class="docutils literal notranslate"><span class="pre">.rst</span></code> files and give them a title heading.</p>
+<a class="reference internal image-reference" href="_images/heading.png"><img alt="_images/heading.png" src="_images/heading.png" style="width: 49%;" /></a>
+<p>Make sure to save the files after adding the heading.</p>
+<p>Next open your index.rst, and add the <code class="docutils literal notranslate"><span class="pre">.rst</span></code> files you touched in the terminal.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Don’t add the file extension <code class="docutils literal notranslate"><span class="pre">.rst</span></code> to the index list.</p>
+</div>
+<a class="reference internal image-reference" href="_images/index.png"><img alt="_images/index.png" src="_images/index.png" style="width: 80%;" /></a>
+<p>At this point, we have</p>
+<blockquote>
+<div><ul class="simple">
+<li>Installed Sphinx.</li>
+<li>created a Sphinx project.</li>
+<li>created .rst files for our project.</li>
+<li>added .rst filenames to the index.rst</li>
+</ul>
+</div></blockquote>
+<p>Now that we have some content configured, let’s build some documentation!</p>
+</div>
+<div class="section" id="building-your-sphinx-project">
+<h2>Building your Sphinx project<a class="headerlink" href="#building-your-sphinx-project" title="Permalink to this headline">¶</a></h2>
+<p>With the base of our project configured, we can generate some html content to view what we’ve started.
+Head back to your terminal application for the next step.</p>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sphinx-build</span> <span class="pre">[options]</span> <span class="pre">&lt;source</span> <span class="pre">directory&gt;</span> <span class="pre">&lt;output</span> <span class="pre">directory&gt;</span> <span class="pre">[filenames]</span></code></div></blockquote>
+<p>If no output directory is listed, the output defaults to the source.</p>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sphinx-build</span> <span class="pre">/path/to/my/sphinx/project/</span> <span class="pre">html</span></code></div></blockquote>
+<p>will result in the following output.</p>
+<img alt="_images/buildoutput.png" src="_images/buildoutput.png" />
+<p>Head back to the finder and locate your source directory and locate the new HTML directory.</p>
+<a class="reference internal image-reference" href="_images/html.png"><img alt="_images/html.png" src="_images/html.png" style="width: 50%;" /></a>
+<p>Double click on the index.html file, and a web browser will display your project.</p>
+<img alt="_images/projecthtml.png" src="_images/projecthtml.png" />
+<p><a class="reference external" href="http://www.sphinx-doc.org/en/master/man/sphinx-build.html">shpinx-build man page and additional options</a></p>
+<p>Doesn’t that look purdy?  I’m not a designer, and with minimal effort I have a resource that looks nice!
+Yes, yes that does look nice, why doesn’t my project look like that?</p>
+</div>
+<div class="section" id="sphinx-themes">
+<h2>Sphinx Themes<a class="headerlink" href="#sphinx-themes" title="Permalink to this headline">¶</a></h2>
+<p>A theme is a collection of HTML templates, stylesheets and other files.  A theme keeps the HTML appearance
+consistant throughout the project making it look good.</p>
+<p>In our example project, we are using <code class="docutils literal notranslate"><span class="pre">sphinx_rtd_theme</span></code>.</p>
+</div>
+<div class="section" id="setting-up-a-theme">
+<h2>Setting up a Theme<a class="headerlink" href="#setting-up-a-theme" title="Permalink to this headline">¶</a></h2>
+<p>Open your text editor and navigate back to the source directory.  Locate the <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> and open it for modification.
+Sphinx has some <a class="reference external" href="http://www.sphinx-doc.org/en/master/theming.html?highlight=themes">built in themes</a> you can use setting the <code class="docutils literal notranslate"><span class="pre">html_theme</span></code> config value in your <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>.</p>
+<ul>
+<li><p class="first">Search <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> for <code class="docutils literal notranslate"><span class="pre">html_theme</span></code>, enter the value <code class="docutils literal notranslate"><span class="pre">sphinx_rtd_theme</span></code> and save the script.</p>
+<img alt="_images/theme.png" src="_images/theme.png" />
+</li>
+<li><p class="first">Open terminal and install the theme <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">sphinx_rtd_theme</span></code></p>
+</li>
+</ul>
+<p>Save all your work.</p>
+<p>Re-build your project, and refresh your browser and now you should see the blue and black theme.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="runnersetup.html" class="btn btn-neutral" title="Setting up the CI Runner for Gitlab" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Dan DeRusha.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
